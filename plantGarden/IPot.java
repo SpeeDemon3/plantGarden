@@ -10,7 +10,7 @@ public interface IPot {
 	int getVolume(); /* Volumen total */
 	int AvailableVolume(); /* Volumen disponible en la maceta */
 	int getSurface(); /* Superficie total */
-	int AvailableSurface(); /* Superficie disponible en la maceta */
+	int availableSurface(); /* Superficie disponible en la maceta */
 	int getDepth();/* Profundidad disponible */
 	
 	PotShape getShape(); /* Forma de la maceta */
