@@ -1,5 +1,6 @@
 package plantGarden.plant;
 
+import plantGarden.IPot;
 import plantGarden.enums.Family;
 
 public class RootPlant extends Plant {
@@ -20,4 +21,16 @@ public class RootPlant extends Plant {
 		this.requiredDepth = requiredDepth;
 	}
 	
+	@Override
+	public boolean haveSpace(IPot pot) {
+		// Variable que verifica si hay profundidad suficiente
+		boolean depthOk = pot.getDepth() > requiredDepth;
+		
+		// Si no hay profundidad suficiente
+		if (!depthOk) {
+			System.out.println("--- Profundidad insuficiente para " + getName() + " en " + pot.getName());
+		}
+		// Retornamos true solo si recibimos 2 true, en caso contrario false
+		return super.haveSpace(pot) && depthOk;
+	}
 }

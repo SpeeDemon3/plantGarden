@@ -5,7 +5,7 @@ import plantGarden.plant.LeafPlant;
 
 public class Lettuce extends LeafPlant {
 
-	protected Lettuce(String name, int distance, int liters) {
+	public Lettuce(String name) {
 		super(name, 12, 22);
 		specie = Species.LECHUGA;
 		compatible.add(Species.TOMATE);

@@ -2,7 +2,7 @@ package plantGarden.plant.plantClasses;
 
 public class CherryTomato extends Tomato{
 
-	protected CherryTomato(String name, int distance, int liters) {
+	public CherryTomato(String name) {
 		super(name, 25, 15);
 	}
 

@@ -5,7 +5,7 @@ import plantGarden.plant.RootPlant;
 
 public class Carrot extends RootPlant {
 
-	protected Carrot(String name, int distance, int liters, int requiredDepth) {
+	public Carrot(String name) {
 		super(name, 10, 3, 25);
 		specie = Species.ZANAHORIA;
 		incompatible.add(Species.PEREJIL);
