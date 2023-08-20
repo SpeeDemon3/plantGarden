@@ -100,16 +100,61 @@ public class Plant implements IPlant {
 		
 	}
 
+	/**
+	 * Verifica si la planta actual es compatible con otra planta especifica.
+	 *
+	 * @param plant La planta con la que se verifica la compatibilidad.
+	 * @return True si la planta actual es compatible con la planta dada, False si no.
+	 */
 	@Override
 	public boolean itsCompatible(IPlant plant) {
-		// TODO Auto-generated method stub
-		return false;
+
+		boolean isCompatible = true;
+		
+	    // Verificar si las especies son diferentes
+		if (!specie.equals(plant.getSpecie())) {
+	        // Si la especie de la planta actual no está en la lista de compatibles de la planta dada
+			if (!this.compatible.contains(plant.getSpecie())) {
+				
+	            // Verificar si las familias son diferentes
+				isCompatible &= !family.equals(plant.getFamily());
+
+				// Verificar si la especie de la planta dada está en la lista de incompatibles de la actual
+				isCompatible &= !incompatible.contains(plant.getSpecie());
+				
+			}
+			
+		}
+		
+		return isCompatible;
 	}
 
+	/**
+	 * Verifica si la maceta tiene suficiente espacio para albergar la planta actual.
+	 *
+	 * @param pot La maceta en la que se verifica el espacio.
+	 * @return True si la maceta tiene suficiente espacio, False si no.
+	 */
 	@Override
 	public boolean haveSpace(IPot pot) {
-		// TODO Auto-generated method stub
-		return false;
+	    // Verificar si la superficie disponible en la maceta es suficiente para la planta actual
+		boolean surfaceOk = pot.availableSurface() > getRequiredSurface();
+		
+	    // Si la superficie no es suficiente, mostrar mensaje de advertencia
+		if (!surfaceOk) {
+			System.out.println("--- Superficie insuficiente para " + getName() + " en " + pot.getName());
+		}
+		
+	    // Verificar si el volumen disponible en la maceta es suficiente para la planta actual
+		boolean volumeOk = pot.availableVolume() > getRequiredVolume();
+		
+	    // Si el volumen no es suficiente, mostrar mensaje de advertencia
+		if (!volumeOk) {
+			System.out.println("--- Volumen insuficiente pera " + getName() + " en " + pot.getName());
+		}
+		
+	    // Retornar True si tanto la superficie como el volumen son suficientes, False si no lo son
+		return surfaceOk && volumeOk;
 	}
 
 	

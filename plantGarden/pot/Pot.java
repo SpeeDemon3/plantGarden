@@ -37,7 +37,7 @@ public abstract class Pot implements IPot {
 	}
 
 	@Override
-	public int AvailableVolume() {
+	public int availableVolume() {
 		return getVolume() - volumeOccupied();
 	}
 	
@@ -143,7 +143,7 @@ public abstract class Pot implements IPot {
 		}
 		
 		sb.append("\t\t>> Disponible sup " + availableSurface() + "cm2 - vol "
-				+ AvailableVolume() + "cm3");
+				+ availableVolume() + "cm3");
 		
 		return sb.toString();
 		
