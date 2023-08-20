@@ -56,7 +56,7 @@ public abstract class Pot implements IPot {
 
 	@Override
 	public int availableSurface() {
-		return getSurface() - availableSurface();
+		return getSurface() - occupiedSurface();
 	}
 	
 	private int occupiedSurface() {
@@ -79,10 +79,49 @@ public abstract class Pot implements IPot {
 		return null;
 	}
 
+	/**
+	 * Intenta plantar una planta en la maceta actual.
+	 *
+	 * @param plant La planta que se intenta plantar.
+	 * @return True si la planta se pudo plantar exitosamente, False si no.
+	 */
 	@Override
 	public boolean plantPlant(IPlant plant) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		System.out.println("--- PLANTANDO " + plant.getName() + " EN " + this.getName());
+	    // Variable para verificar si todas las plantas existentes son compatibles
+		boolean compatiblesOk = true;
+		
+	    // Iterar a traves de las plantas existentes en la maceta para verificar compatibilidad
+		for (IPlant p : plants) {
+	        // Verificar si la planta actual es compatible con la planta a plantar
+			boolean compatibleOk = plant.itsCompatible(p);
+	        // Si no son compatibles, mostrar un mensaje informativo
+			if (!compatibleOk) {
+				System.out.println("--- " + p.getName() + " no es compatible con" 
+						+ plant.getName());
+			}
+	        // Actualizar la variable de compatibilidad general
+			compatiblesOk &= compatibleOk;
+		}
+		
+		// Variable para comprobar si la planta entra en la maceta o no
+		boolean fitPlant = false;
+	    // Si todas las plantas son compatibles, verificar si la planta puede caber en la maceta
+		if (compatiblesOk) {
+			// Comprobamos si tiene espacio en esta maceta indicandolo con this
+			fitPlant = plant.haveSpace(this);
+		}
+		
+	    // Si la planta puede caber en la maceta, agregarla a la colección de plantas y plantarla
+		if (fitPlant) {
+			// Añadimos la planta a la coleccion de plantas
+			plants.add(plant);
+			// Añadimos la planta a la maceta
+			plant.plantAPlant(this);
+		}
+	    // Retornar true si la planta fue plantada exitosamente, o false si no cabe o no es compatible
+		return fitPlant;
 	}
 
 	@Override
